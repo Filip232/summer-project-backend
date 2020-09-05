@@ -82,10 +82,11 @@ app.post('/games/:id/join', (req, res) => {
     const { id } = req.params;
     const game = db.get(DB.GAME).find({ id });
     const gameValue = game.value();
+    if (!gameValue) return resError(res, `Cannot find a game with an id: "${id}"`, 404);
     const messagesDb = db.get(DB.MESSAGE);
     const players = gameValue.players.map(id => playerDb.find({id}).value());
     const spectators = gameValue.spectators.map(id => playerDb.find({id}).value());
-    const owner = playerDb.find({id: gameValue.ownerId}).value();
+    const owner = playerDb.find({id: gameValue.owner}).value();
     const messages = gameValue.messages.map(id => messagesDb.find({id}).value());
 
     if (!players.find(({id}) => id === userId) && !spectators.find(({id}) => id === userId)) {
@@ -108,6 +109,23 @@ app.post('/games/:id/join', (req, res) => {
             owner,
             messages
         }
+    });
+});
+
+app.post('/games/:id/start', (req, res) => {
+    const {id} = req.params;
+    const game = db.get(DB.GAME).find({ id });
+    const gameValue = game.value();
+    if (!gameValue) return resError(res, `Cannot find a game with an id: "${id}"`, 404);
+    if (gameValue.active) return resError(res, `Game with an id: "${id}" has been already started`, 400);
+
+    game
+        .set('active', true)
+        .set('lastUpdated', Date.now())
+    .write();
+
+    return res.json({
+        success: true
     });
 });
 
@@ -134,7 +152,7 @@ function checkGameState (id) {
         let timeout;
         const checkChanges = () => {
             if (initialLastUpdated < gameLastUpdated.value()) {
-                resolve({game:game.value()});
+                resolve({ game: game.value() });
             } else if (Date.now() - initialTime > 25000) {
                 resolve({});
             } else {
