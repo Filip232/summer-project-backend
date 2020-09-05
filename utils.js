@@ -10,6 +10,8 @@ const generateId = () => {
     } while (
         openDbs.some(db => db.find(idPredicate).value())
     );
+
+    return idPredicate.id;
 };
 
 const resError = (res, errorMsg, status = 400) => {
@@ -19,4 +21,4 @@ const resError = (res, errorMsg, status = 400) => {
     })
 };
 
-module.exports = { generateId };
+module.exports = { generateId, resError };

@@ -12,10 +12,6 @@ const { generateId, resError } = require('./utils.js');
 }
 */
 
-app.get('/users', (req, res) => {
-    return res.json({elo:'s'});
-})
-
 app.post('/users', (req, res) => {
     const user = {
         id: generateId(),

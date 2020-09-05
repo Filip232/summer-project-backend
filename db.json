@@ -1,4 +1,52 @@
 {
-  "games": [],
-  "users": []
+  "games": [
+    {
+      "id": "elo",
+      "active": false,
+      "owner": "m9DWM34pGfXtueNcmvh3j",
+      "players": [],
+      "messages": [],
+      "spectators": [
+        "m9DWM34pGfXtueNcmvh3j",
+        "Hh_CjL6Rbu3nTqPZyYYXp",
+        "ofZr0DIA4nfjmkmbr2UZM",
+        "-VrqIVeOzqXss1b236vRI"
+      ],
+      "lastUpdated": 1599314537664
+    }
+  ],
+  "users": [
+    {
+      "id": "m9DWM34pGfXtueNcmvh3j",
+      "name": "Fifek",
+      "stats": {
+        "win": 0,
+        "loose": 0
+      }
+    },
+    {
+      "id": "-VrqIVeOzqXss1b236vRI",
+      "name": "FRS",
+      "stats": {
+        "win": 0,
+        "loose": 0
+      }
+    },
+    {
+      "id": "Hh_CjL6Rbu3nTqPZyYYXp",
+      "name": "Kamcio",
+      "stats": {
+        "win": 0,
+        "loose": 0
+      }
+    },
+    {
+      "id": "ofZr0DIA4nfjmkmbr2UZM",
+      "name": "xD",
+      "stats": {
+        "win": 0,
+        "loose": 0
+      }
+    }
+  ]
 }
